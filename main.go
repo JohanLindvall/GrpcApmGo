@@ -43,7 +43,7 @@ type server struct {
 
 // SayHello implements helloworld.GreeterServer
 func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
-	return c.SayHello(ctx, in)
+	return c.SayHello2(ctx, in)
 }
 
 // SayHello implements helloworld.GreeterServer
@@ -55,7 +55,7 @@ func (s *server) SayHello2(ctx context.Context, in *pb.HelloRequest) (*pb.HelloR
 func main() {
 	// 172.16.31.75:5000
 	// localhost:50001
-	conn, err := grpc.Dial("172.16.31.75:5000", grpc.WithInsecure(), grpc.WithChainUnaryInterceptor(apmgrpc.NewUnaryClientInterceptor()))
+	conn, err := grpc.Dial("localhost:50001", grpc.WithInsecure(), grpc.WithChainUnaryInterceptor(apmgrpc.NewUnaryClientInterceptor()))
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
